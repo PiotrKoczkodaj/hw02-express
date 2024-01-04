@@ -1,5 +1,5 @@
 const express = require('express');
-const { listContacts,getContactById, addContact } = require('../../models/contacts');
+const { listContacts,getContactById, addContact, removeContact, updateContact } = require('../../models/contacts');
 const router = express.Router();
 
 
@@ -18,12 +18,12 @@ router.post('/', async (req, res, next) => {
   res.json(await addContact(req.query))
 })
 
-// router.delete('/:contactId', async (req, res, next) => {
-//   res.json({ message: 'template message' })
-// })
+router.delete('/:contactId', async (req, res, next) => {
+  res.json(await removeContact(req.params.contactId))
+})
 
-// router.put('/:contactId', async (req, res, next) => {
-//   res.json({ message: 'template message' })
-// })
+router.put('/:contactId', async (req, res, next) => {
+  res.json(await updateContact(req.params.contactId,req.query))
+})
 
 module.exports = router

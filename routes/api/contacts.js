@@ -1,5 +1,5 @@
 import express from 'express';
-import { listContacts, getContactById, addContact, removeContact, updateContact } from '../../models/contacts'
+import { listContacts, getContactById, addContact, removeContact, updateContact } from '../../models/contacts.js'
 
 const router = express.Router();
 
@@ -25,5 +25,4 @@ router.put('/:contactId', async (req, res, next) => {
   res.json(await updateContact(req.params.contactId,req.query))
 })
 
-
-export router as contactsRouter
+export { router as contactsRouter }

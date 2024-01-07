@@ -17,7 +17,7 @@ const getContactById = async (contactId) => {
     .readFile("models/contacts.json")
     .then((resp) => {
       const contactsList = JSON.parse(resp);
-      results = contactsList.filter((contact) => {
+     const results = contactsList.filter((contact) => {
         return contact.id === contactId;
       });
       if (results[0] === undefined) {

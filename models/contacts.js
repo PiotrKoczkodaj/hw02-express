@@ -1,5 +1,5 @@
-const fs = require("fs").promises;
-const Joi = require("joi");
+import fs from 'fs/promises';
+import Joi from 'joi';
 
 const listContacts = async () => {
   return fs
@@ -132,10 +132,11 @@ const updateContact = async (contactId, body) => {
   }
 };
 
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-};
+// module.exports = {
+//   listContacts,
+//   getContactById,
+//   removeContact,
+//   addContact,
+//   updateContact,
+// };
+export {listContacts,getContactById,removeContact,addContact,updateContact}

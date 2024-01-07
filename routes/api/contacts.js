@@ -1,8 +1,7 @@
-const express = require('express');
-const { listContacts,getContactById, addContact, removeContact, updateContact } = require('../../models/contacts');
+import express from 'express';
+import { listContacts, getContactById, addContact, removeContact, updateContact } from '../../models/contacts'
+
 const router = express.Router();
-
-
 
 router.get('/', async (req, res, next) => {
    res.json(JSON.parse(await listContacts()));
@@ -26,4 +25,5 @@ router.put('/:contactId', async (req, res, next) => {
   res.json(await updateContact(req.params.contactId,req.query))
 })
 
-module.exports = router
+
+export router as contactsRouter

@@ -43,7 +43,6 @@ const addContact = async (body) => {
 
 const removeContact = async (contactId) => {
   await Contact.findByIdAndDelete({ _id: contactId });
-  
 };
 
 const updateContact = async (contactId, body) => {
@@ -51,6 +50,11 @@ const updateContact = async (contactId, body) => {
 };
 
 const updateStatusContact = async (contactId, body) => {
-  
+  if (body) {
+     await Contact.findByIdAndUpdate({ _id: contactId }, { favorite:body.favorite })
+  } else {
+   return {"message": "missing field favorite"}
 }
+}
+
 export {listContacts,getContactById,removeContact,addContact,updateContact,updateStatusContact}

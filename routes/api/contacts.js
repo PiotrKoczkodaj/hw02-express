@@ -26,7 +26,7 @@ router.put('/:contactId', async (req, res, next) => {
 })
 
 router.patch('/:contactId/favorite', async (req, res, next) => {
-  res.json(await updateStatusContact(contactId, body))
+  res.json(await updateStatusContact(req.params.contactId,req.query))
 })
 
 export { router as contactsRouter }

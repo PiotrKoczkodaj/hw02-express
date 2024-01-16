@@ -1,10 +1,10 @@
 import express from 'express';
-import { listContacts, getContactById, addContact, removeContact, updateContact } from '../../models/contacts.js'
+import { listContacts, getContactById, addContact, removeContact, updateContact,updateStatusContact } from '../../models/contacts.js'
 
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-   res.json(JSON.parse(await listContacts()));
+   res.json(await listContacts());
 
 })
 
@@ -23,6 +23,10 @@ router.delete('/:contactId', async (req, res, next) => {
 
 router.put('/:contactId', async (req, res, next) => {
   res.json(await updateContact(req.params.contactId,req.query))
+})
+
+router.patch('/:contactId/favorite', async (req, res, next) => {
+  res.json(await updateStatusContact(contactId, body))
 })
 
 export { router as contactsRouter }

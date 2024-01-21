@@ -1,11 +1,10 @@
 import express from 'express';
-import { listContacts, getContactById, addContact, removeContact, updateContact,updateStatusContact } from '../../models/contacts.js'
+import { listContacts, getContactById, addContact, removeContact, updateContact,updateStatusContact } from './contacts.js'
 
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
    res.json(await listContacts());
-
 })
 
 router.get('/:contactId', async (req, res, next) => {

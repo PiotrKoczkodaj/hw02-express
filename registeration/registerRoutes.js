@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser } from "./users.js";
+import { registerUser } from "./register.js";
 
 const router = express.Router();
 
@@ -8,4 +8,4 @@ router.post('/', async (req, res, next) => {
 })
 
 
-export { router as usersRouter }
+export { router as registerRouter }

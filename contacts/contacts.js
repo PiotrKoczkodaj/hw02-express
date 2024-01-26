@@ -8,7 +8,7 @@ const listContacts = async (req) => {
   const tokenWithoutBearer = tokenFromRequest.slice(7)
   const userFromToken = jwt.decode(tokenWithoutBearer);
 
-  const contacts = await Contact.find();
+  const contacts = await Contact.find({owner:userFromToken.email});
 
  return contacts.map(contact => {
     if (contact.owner === userFromToken.email) {

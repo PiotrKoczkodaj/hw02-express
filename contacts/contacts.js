@@ -1,8 +1,10 @@
 import { Contact } from "./contactSchema.js";
 
 const listContacts = async () => {
+
   const contacts = await Contact.find();
   return contacts;
+  
 };
 
 const getContactById = async (contactId) => {

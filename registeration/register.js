@@ -2,6 +2,7 @@ import { User } from "./userSchema.js";
 import bcrypt from "bcryptjs";
 import Joi from "joi";
 
+
 const registerUser = async (body) => {
   const salt = bcrypt.genSaltSync(10);
 
@@ -25,6 +26,7 @@ const registerUser = async (body) => {
    })
     
     user.save();
+    return await User.find()
     
   } else {
    return 'Email in use'

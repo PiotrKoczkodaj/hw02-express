@@ -1,30 +1,31 @@
 import express from 'express';
 import { listContacts, getContactById, addContact, removeContact, updateContact,updateStatusContact } from './contacts.js'
+import { auth } from '../login/middleware.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/',auth, async (req, res, next) => {
    res.json(await listContacts());
 })
 
-router.get('/:contactId', async (req, res, next) => {
+router.get('/:contactId',auth, async (req, res, next) => {
     res.json(await getContactById(req.params.contactId));
     
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/',auth, async (req, res, next) => {
   res.json(await addContact(req.query))
 })
 
-router.delete('/:contactId', async (req, res, next) => {
+router.delete('/:contactId',auth, async (req, res, next) => {
   res.json(await removeContact(req.params.contactId))
 })
 
-router.put('/:contactId', async (req, res, next) => {
+router.put('/:contactId',auth, async (req, res, next) => {
   res.json(await updateContact(req.params.contactId,req.query))
 })
 
-router.patch('/:contactId/favorite', async (req, res, next) => {
+router.patch('/:contactId/favorite',auth, async (req, res, next) => {
   res.json(await updateStatusContact(req.params.contactId,req.query))
 })
 

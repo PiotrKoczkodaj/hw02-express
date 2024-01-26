@@ -1,8 +1,6 @@
 import { User } from "../registeration/userSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import passport from "passport";
-import passportJWT from "passport-jwt";
 import "dotenv/config";
 const secret = process.env.SECRET;
 
@@ -22,10 +20,18 @@ const login = async (body) => {
     const payload = {
       id: user[0]._id,
       email: user[0].email,
+      
     };
-
-    const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-    user[0].token = token;
+    const generateToken = jwt.sign(payload, secret, { expiresIn: "1h" });
+    await User.findOneAndUpdate({ _id: user[0].id }, { token: generateToken });
+    
+    return {
+      email: user[0].email,
+      subscription: user[0].subscription,
+      token:user[0].token
+    }
+    
+   
   }
 };
 

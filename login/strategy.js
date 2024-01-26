@@ -13,7 +13,7 @@ export const strategy = new passportJWT.Strategy(
   },
   function (payload, done) {
     User.find({ _id: payload.id })
-      .then((user) => {
+      .then(([user]) => {
         if (!user) {
           return done(new Error("User not found"));
         }

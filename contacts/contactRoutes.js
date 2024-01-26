@@ -5,28 +5,28 @@ import { auth } from '../login/middleware.js';
 const router = express.Router();
 
 router.get('/',auth, async (req, res, next) => {
-   res.json(await listContacts());
+   res.json(await listContacts(req));
 })
 
 router.get('/:contactId',auth, async (req, res, next) => {
-    res.json(await getContactById(req.params.contactId));
+    res.json(await getContactById(req));
     
 })
 
 router.post('/',auth, async (req, res, next) => {
-  res.json(await addContact(req.query))
+  res.json(await addContact(req))
 })
 
 router.delete('/:contactId',auth, async (req, res, next) => {
-  res.json(await removeContact(req.params.contactId))
+  res.json(await removeContact(req))
 })
 
 router.put('/:contactId',auth, async (req, res, next) => {
-  res.json(await updateContact(req.params.contactId,req.query))
+  res.json(await updateContact(req,req.query))
 })
 
 router.patch('/:contactId/favorite',auth, async (req, res, next) => {
-  res.json(await updateStatusContact(req.params.contactId,req.query))
+  res.json(await updateStatusContact(req,req.query))
 })
 
 export { router as contactsRouter }

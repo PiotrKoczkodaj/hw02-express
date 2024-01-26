@@ -20,6 +20,7 @@ const login = async (body) => {
     const payload = {
       id: user[0]._id,
       email: user[0].email,
+      subscription:user[0].subscription
       
     };
     const generateToken = jwt.sign(payload, secret, { expiresIn: "1h" });

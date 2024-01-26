@@ -5,6 +5,7 @@ import { contactsRouter }  from './contacts/contactRoutes.js';
 import { registerRouter } from './registeration/registerRoutes.js';
 import { loginRouter } from './login/loginRoutes.js';
 import { logoutRouter } from './logout/logoutRoute.js';
+import { currentRouter } from './user/userCurrentRoutes.js';
 
 export const app = express()
 
@@ -17,7 +18,8 @@ app.use(express.json())
 app.use('/api/contacts', contactsRouter)
 app.use('/users/signup', registerRouter)
 app.use('/user/login', loginRouter)
-app.use('/users/logout',logoutRouter)
+app.use('/users/logout', logoutRouter)
+app.use('/users/current',currentRouter)
 
 app.use((req, res) => {
    res.status(404).json({ message: 'Not found' })

@@ -52,15 +52,11 @@ const addContact = async (req) => {
 
 const removeContact = async (req) => {
 
-  const tokenFromRequest = req.headers.authorization;
-  const tokenWithoutBearer = tokenFromRequest.slice(7)
-  const userFromToken = jwt.decode(tokenWithoutBearer);
+  // const tokenFromRequest = req.headers.authorization;
+  // const tokenWithoutBearer = tokenFromRequest.slice(7)
+  // const userFromToken = jwt.decode(tokenWithoutBearer);
 
-  const contact = await Contact.findOne({ _id: req.params.id })
-
-  if (userFromToken.email === contact.owner) {
-    await Contact.findByIdAndDelete({ _id: req.params.id });
-  }
+    return await Contact.findByIdAndDelete({ _id: req.params.id });
   
 };
 
@@ -70,10 +66,10 @@ const updateContact = async (req, body) => {
   const tokenWithoutBearer = tokenFromRequest.slice(7)
   const userFromToken = jwt.decode(tokenWithoutBearer);
 
-  const contact = await Contact.findOne({ _id: req.params.id })
-
+  const contact = await Contact.findOne({ _id: req.params.contactId })
+console.log(contact)
   if (userFromToken.email === contact.owner) {
-await Contact.findByIdAndUpdate({_id:req.params.id},{...body})
+await Contact.findByIdAndUpdate({_id:req.params.contactId},{...body})
   }
   
 };

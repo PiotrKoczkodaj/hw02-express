@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const { Schema, model } = mongoose;
 
 const users = Schema({
@@ -20,7 +21,10 @@ const users = Schema({
   token: {
     type: String,
     default: null,
-    }
+  },
+  avatarUrl: {
+    type:String
+  }
 })
 
 export const User = model('user', users);

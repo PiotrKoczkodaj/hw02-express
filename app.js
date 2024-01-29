@@ -7,6 +7,7 @@ import { loginRouter } from './login/loginRoutes.js';
 import { logoutRouter } from './logout/logoutRoute.js';
 import { currentRouter } from './user/userCurrentRoutes.js';
 
+
 export const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
@@ -20,6 +21,7 @@ app.use('/users/signup', registerRouter)
 app.use('/user/login', loginRouter)
 app.use('/users/logout', logoutRouter)
 app.use('/users/current',currentRouter)
+
 
 app.use((req, res) => {
    res.status(404).json({ message: 'Not found' })

@@ -7,4 +7,5 @@ router.get('/', async (req, res, next) => {
     res.json(await userCurrent(req))
 })
 
+
 export { router as currentRouter}

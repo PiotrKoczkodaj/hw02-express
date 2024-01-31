@@ -8,7 +8,7 @@ import { logoutRouter } from './logout/logoutRoute.js';
 import { currentRouter } from './user/userCurrentRoutes.js';
 import { getAvatarRouter } from './public/showAvatarRouter.js';
 import { uploadImageRouter } from './public/uploadImageRouter.js';
-
+import { updateAvatarRouter } from './updateAvatar/updateAvatarRouter.js';
 
 export const app = express()
 
@@ -25,6 +25,7 @@ app.use('/users/logout', logoutRouter)
 app.use('/users/current',currentRouter)
 app.use('/avatar', getAvatarRouter)
 app.use('/upload',uploadImageRouter)
+app.use('/users/avatars', updateAvatarRouter)
 
 app.use((req, res) => {
    res.status(404).json({ message: 'Not found' })

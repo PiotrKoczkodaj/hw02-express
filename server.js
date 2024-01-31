@@ -1,52 +1,19 @@
 import mongoose from "mongoose";
-import path from 'path';
 import fs from "fs/promises";
-import multer from "multer";
-import express, { response } from 'express';
 import createError from 'http-errors';
-import gravatar from 'gravatar';
+import {app} from './app.js'
 import 'dotenv/config';
+import { uploadDir } from "./public/uploadImageRouter.js";
+import { storeImage } from "./public/uploadImageRouter.js"
 
-const app = express();
-const uploadDir = path.join(process.cwd(), 'public');
-const storeImage = path.join(uploadDir, 'avatars')
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, storeImage);
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-  limits: {
-    fileSize: 1048576,
-  },
-});
-
-const upload = multer({
-  storage: storage,
-});
-
-app.post('/upload', upload.single('avatar'), async (req, res, next) => {
-  const { description } = req.body;
-  console.log(req.file)
-  const { path: temporaryName, originalname } = req.file;
-  const fileName = path.join(storeImage, originalname);
-  try {
-    await fs.rename(temporaryName, fileName);
-  } catch (err) {
-    await fs.unlink(temporaryName);
-    return next(err);
-  }
-  res.json({ description, message: 'Plik załadowany pomyślnie', status: 200 });
-});
-
-app.get('/avatar/:filename', upload.single('avatar'), async (req, res, next) => {
-
-  const src = storeImage +'/'+req.params.filename;
-res.sendFile(src)
-
+const connection = mongoose.connect(process.env.DB_HOST).catch(error => {
+  console.log(process.error);
+  process.exit(1)
+}).finally(() => {
+  console.log("Database connection successful")
 })
+
+
 
 app.use((req, res, next) => {
   next(createError(404));
@@ -65,12 +32,7 @@ const createFolderIfNotExist = async folder => {
   }
 };
 
-const connection = mongoose.connect(process.env.DB_HOST).catch(error => {
-  console.log(process.error);
-  process.exit(1)
-}).finally(() => {
-  console.log("Database connection successful")
-})
+
 
 app.listen(3000, () => {
   createFolderIfNotExist(uploadDir);

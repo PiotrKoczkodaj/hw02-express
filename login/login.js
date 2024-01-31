@@ -5,6 +5,7 @@ import "dotenv/config";
 const secret = process.env.SECRET;
 
 const login = async (body) => {
+   
   const validatePassword = User.find({ email: body.email }).then((resp) => {
     const hashedPassword = resp[0].password;
     const isPasswordMatched = bcrypt.compareSync(body.password, hashedPassword);

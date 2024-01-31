@@ -1,7 +1,7 @@
 import { User } from "./userSchema.js";
 import bcrypt from "bcryptjs";
 import Joi from "joi";
-import gravatar from 'gravatar';
+import avatar from 'gravatar';
 
 const registerUser = async (body) => {
   const salt = bcrypt.genSaltSync(10);
@@ -16,17 +16,18 @@ const registerUser = async (body) => {
     password: Joi.string().required(),
   });
 
-
-  console.log(gravatar.profile_url(email))
-
+  const userProfile = avatar.url(email, { s: '200', r: 'pg'});
+  
   if (await User.findOne({ email }) === null) {
     
    const user = new User({
      email,
-     password
+     password,
+    avatarUrl:userProfile
    })
     
     user.save();
+    
     return await User.find()
     
   } else {

@@ -1,10 +1,14 @@
-import express from 'express';
-import { auth } from '../login/middleware.js';
+import express from "express";
+import { auth } from "../login/middleware.js";
 import multer from "multer";
-import { storeImage } from '../public/uploadImageRouter.js';
-import { User } from '../registeration/userSchema.js';
+import { User } from "../registeration/userSchema.js";
+import path from "path";
+import { modificationPicture } from "../tmp/modificationPictures.js";
 
 const router = express.Router();
+
+export const uploadDir = path.join(process.cwd(), "tmp");
+export const storeImage = path.join(uploadDir, "picturesToModification");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,16 +22,25 @@ const storage = multer.diskStorage({
   },
 });
 
-
 const upload = multer({
   storage: storage,
 });
 
-router.patch('/', auth, upload.single('avatar'), async (req, res, next) => {
-    
-    await User.findOneAndUpdate({ _id: req.user.id }, { avatarUrl: req.file.path });
-    
-   res.json({avatarUrl:req.file.path})
-})
+router.patch("/", auth, upload.single("avatar"), async (req, res, next) => {
+  const user = req.user;
+  const fileName = req.file.originalname;
 
-export {router as updateAvatarRouter}
+  modificationPicture(
+    `tmp/picturesToModification/${fileName}`,
+    `${process.cwd()}/public/avatars/UserId_${user.id}.JPG`
+  );
+
+  await User.findOneAndUpdate(
+    { _id: user.id },
+    { avatarUrl: `${process.cwd()}/public/avatars/UserId_${user.id}.JPG` }
+  );
+
+  res.json({ avatarUrl: req.file.path });
+});
+
+export { router as updateAvatarRouter };

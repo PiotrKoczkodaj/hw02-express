@@ -1,5 +1,5 @@
-import { User } from '../registeration/userSchema.js';
 import jwt from "jsonwebtoken";
+import { User } from '../registeration/userSchema.js';
 
 const logout = async (req) => {
 

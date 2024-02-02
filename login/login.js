@@ -1,7 +1,8 @@
-import { User } from "../registeration/userSchema.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import jwt from "jsonwebtoken";
+import { User } from "../registeration/userSchema.js";
+
 const secret = process.env.SECRET;
 
 const login = async (body) => {
@@ -32,8 +33,6 @@ const login = async (body) => {
       subscription: user[0].subscription,
       token:user[0].token
     }
-    
-   
   }
 };
 

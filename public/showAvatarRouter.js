@@ -4,7 +4,6 @@ import { storeImage } from '../public/uploadImageRouter.js';
 
 const router = express.Router();
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, storeImage);
@@ -16,7 +15,6 @@ const storage = multer.diskStorage({
     fileSize: 1048576,
   },
 });
-
 
 const upload = multer({
   storage: storage,

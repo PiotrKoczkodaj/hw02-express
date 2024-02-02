@@ -1,9 +1,9 @@
-import express from "express";
 import { auth } from "../login/middleware.js";
-import multer from "multer";
-import { User } from "../registeration/userSchema.js";
-import path from "path";
+import express from "express";
 import { modificationPicture } from "../tmp/modificationPictures.js";
+import multer from "multer";
+import path from "path";
+import { User } from "../registeration/userSchema.js";
 
 const router = express.Router();
 
@@ -34,12 +34,10 @@ router.patch("/", auth, upload.single("avatar"), async (req, res, next) => {
     `tmp/picturesToModification/${fileName}`,
     `${process.cwd()}/public/avatars/UserId_${user.id}.JPG`
   );
-
   await User.findOneAndUpdate(
     { _id: user.id },
     { avatarUrl: `${process.cwd()}/public/avatars/UserId_${user.id}.JPG` }
   );
-
   res.json({ avatarUrl: req.file.path });
 });
 

@@ -1,9 +1,7 @@
 import { Contact } from "./contactSchema.js";
-import { User } from '../registeration/userSchema.js';
 import jwt from 'jsonwebtoken';
 
 const listContacts = async (req) => {
-
   const tokenFromRequest = req.headers.authorization;
   const tokenWithoutBearer = tokenFromRequest.slice(7)
   const userFromToken = jwt.decode(tokenWithoutBearer);
@@ -28,11 +26,9 @@ const getContactById = async (req) => {
   if (userFromToken.email === contactById.owner) {
     return contactById;
   }
-  
 };
 
 const addContact = async (req) => {
-
   const tokenFromRequest = req.headers.authorization;
   const tokenWithoutBearer = tokenFromRequest.slice(7)
   const userFromToken = jwt.decode(tokenWithoutBearer);
@@ -52,12 +48,8 @@ const addContact = async (req) => {
 
 const removeContact = async (req) => {
 
-  // const tokenFromRequest = req.headers.authorization;
-  // const tokenWithoutBearer = tokenFromRequest.slice(7)
-  // const userFromToken = jwt.decode(tokenWithoutBearer);
-
     return await Contact.findByIdAndDelete({ _id: req.params.id });
-  
+
 };
 
 const updateContact = async (req, body) => {
@@ -71,7 +63,6 @@ console.log(contact)
   if (userFromToken.email === contact.owner) {
 await Contact.findByIdAndUpdate({_id:req.params.contactId},{...body})
   }
-  
 };
 
 const updateStatusContact = async (req, body) => {
@@ -89,10 +80,7 @@ const updateStatusContact = async (req, body) => {
   } else {
    return {"message": "missing field favorite"}
 }
-
   }
-
- 
 }
 
 export {listContacts,getContactById,removeContact,addContact,updateContact,updateStatusContact}

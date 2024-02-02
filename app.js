@@ -1,14 +1,14 @@
-import express from 'express';
-import logger from 'morgan';
-import cors from 'cors';
-import { contactsRouter }  from './contacts/contactRoutes.js';
-import { registerRouter } from './registeration/registerRoutes.js';
-import { loginRouter } from './login/loginRoutes.js';
-import { logoutRouter } from './logout/logoutRoute.js';
+import { contactsRouter } from './contacts/contactRoutes.js';
 import { currentRouter } from './user/userCurrentRoutes.js';
+import cors from 'cors';
+import express from 'express';
 import { getAvatarRouter } from './public/showAvatarRouter.js';
-import { uploadImageRouter } from './public/uploadImageRouter.js';
+import { logoutRouter } from './logout/logoutRoute.js';
+import { loginRouter } from './login/loginRoutes.js';
+import logger from 'morgan';
 import { updateAvatarRouter } from './updateAvatar/updateAvatarRouter.js';
+import { uploadImageRouter } from './public/uploadImageRouter.js';
+import { registerRouter } from './registeration/registerRoutes.js';
 
 export const app = express()
 
@@ -23,7 +23,7 @@ app.use('/users/signup', registerRouter)
 app.use('/user/login', loginRouter)
 app.use('/users/logout', logoutRouter)
 app.use('/users/current',currentRouter)
-app.use('/avatar', getAvatarRouter)
+app.use('/avatars', getAvatarRouter)
 app.use('/upload',uploadImageRouter)
 app.use('/users/avatars', updateAvatarRouter)
 

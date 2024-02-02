@@ -1,11 +1,10 @@
-import { User } from "./userSchema.js";
+import avatar from "gravatar";
 import bcrypt from "bcryptjs";
 import Joi from "joi";
-import avatar from "gravatar";
+import { User } from "./userSchema.js";
 
 const registerUser = async (body) => {
   const salt = bcrypt.genSaltSync(10);
-
   const email = body.email;
   const password = bcrypt.hashSync(body.password, salt);
 

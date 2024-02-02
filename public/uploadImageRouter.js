@@ -1,8 +1,9 @@
-import path from 'path';
-import multer from "multer";
-import express from 'express';
 import 'dotenv/config';
+import express from 'express';
 import fs from "fs/promises";
+import multer from "multer";
+import path from 'path';
+
 const router = express.Router();
 
 export const uploadDir = path.join(process.cwd(), 'public');
@@ -26,7 +27,7 @@ const upload = multer({
 
 router.post('/',upload.single('avatar'), async (req, res, next) => {
 const { description } = req.body;
-    const { path: temporaryName, originalname } = req.file;
+const { path: temporaryName, originalname } = req.file;
     
   const fileName = path.join(storeImage, originalname);
   try {

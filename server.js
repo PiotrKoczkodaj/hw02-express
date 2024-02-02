@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import fs from "fs/promises";
-import createError from 'http-errors';
 import {app} from './app.js'
+import createError from 'http-errors';
 import 'dotenv/config';
+import fs from "fs/promises";
+import mongoose from "mongoose";
 import { uploadDir } from "./public/uploadImageRouter.js";
 import { storeImage } from "./public/uploadImageRouter.js"
 
@@ -12,8 +12,6 @@ const connection = mongoose.connect(process.env.DB_HOST).catch(error => {
 }).finally(() => {
   console.log("Database connection successful")
 })
-
-
 
 app.use((req, res, next) => {
   next(createError(404));
@@ -31,8 +29,6 @@ const createFolderIfNotExist = async folder => {
     await fs.mkdir(folder);
   }
 };
-
-
 
 app.listen(3000, () => {
   createFolderIfNotExist(uploadDir);

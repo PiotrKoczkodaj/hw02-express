@@ -1,6 +1,6 @@
+import {auth} from '../login/middleware.js'
 import express from "express";
 import { logout } from "./logout.js";
-import {auth} from '../login/middleware.js'
 
 const router = express.Router();
 

@@ -7,5 +7,4 @@ router.post('/', async (req, res, next) => {
    res.json(await login(req.query))
 })
 
-
 export { router as loginRouter }

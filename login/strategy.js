@@ -1,7 +1,7 @@
+import "dotenv/config";
 import passport from "passport";
 import passportJWT from "passport-jwt";
 import { User } from "../registeration/userSchema.js";
-import "dotenv/config";
 
 const secret = process.env.SECRET;
 const ExtractJWT = passportJWT.ExtractJwt;

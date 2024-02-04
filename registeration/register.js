@@ -24,7 +24,7 @@ const registerUser = async (body) => {
       avatarUrl: userProfile,
     });
     user.save();
-    return await User.find();
+    return 'Rejestracja Pomyślna';
   } else {
     return "Email in use";
   }

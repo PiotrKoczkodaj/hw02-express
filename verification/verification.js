@@ -1,16 +1,20 @@
 import { User } from "../registeration/userSchema.js";
 
-export const verification = async (req,res,next) => {
+export const verification = async (req,res) => {
     
     const tokenFromRequest = req.params.verificationToken;
     
     const userWithToken = await User.find({verificationToken: tokenFromRequest})
     
     if (userWithToken.length === 0) {
-       res.status(404).send('User not found')
+       return ' ERROR 404 User not found'
+    }
+    
+   else {
+    await User.updateOne({verificationToken:tokenFromRequest},{verificationToken:null,verify:true})
+    return 'Verification successful' 
     }
 
-     await User.updateOne({verificationToken:tokenFromRequest},{verificationToken:null,verify:true})
-
-    return res.status(200).send('Verification Succesfull')
+ 
+    
 }

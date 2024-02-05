@@ -16,8 +16,16 @@ const login = async (body) => {
     }
   });
 
-  if ((await validatePassword) === true) {
+
+
+
+  if (await validatePassword === true) {
+    
     const user = await User.find({ email: body.email });
+
+    if (user[0].verify === false) {
+      return 'Your account is not active'
+    }
 
     const payload = {
       id: user[0]._id,

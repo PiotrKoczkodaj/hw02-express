@@ -9,6 +9,7 @@ import logger from 'morgan';
 import { updateAvatarRouter } from './updateAvatar/updateAvatarRouter.js';
 import { uploadImageRouter } from './public/uploadImageRouter.js';
 import { registerRouter } from './registeration/registerRoutes.js';
+import { verificationRouter } from './verification/verificationRoutes.js';
 
 export const app = express()
 
@@ -26,6 +27,7 @@ app.use('/users/current',currentRouter)
 app.use('/avatars', getAvatarRouter)
 app.use('/upload',uploadImageRouter)
 app.use('/users/avatars', updateAvatarRouter)
+app.use('/verify',verificationRouter)
 
 app.use((req, res) => {
    res.status(404).json({ message: 'Not found' })

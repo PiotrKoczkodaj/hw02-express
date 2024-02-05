@@ -16,9 +16,6 @@ const login = async (body) => {
     }
   });
 
-
-
-
   if (await validatePassword === true) {
     
     const user = await User.find({ email: body.email });

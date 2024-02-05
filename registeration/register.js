@@ -30,13 +30,13 @@ const registerUser = async (body,res) => {
   to: 'gotio12316@gmail.com',
   subject: 'Powitanie ',
     text: 'Cześć. Testujemy wysyłanie wiadomości! Piotr Koczkodaj',
-    html: `<b>Your verification token: <a href="${linkToActivate}">${linkToActivate}</a></b>`
+    html: `<b>Your verification token, copy and paste into your browser to activate account: <a href="${linkToActivate}">${linkToActivate}</a></b>`
 };
 
      await transporter
       .sendMail(emailOptions)
-  //   .then(info => console.log(info))
-  // .catch(err => console.log(err));
+    .then(info => console.log(info))
+  .catch(err => console.log(err));
 
     
     return 'Verification email sent';
